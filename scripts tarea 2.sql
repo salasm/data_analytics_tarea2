@@ -86,10 +86,9 @@ WHERE company_id IN (
 );
 
 #NIVEL 3
-'''
-Ejercicio 1: Presenta el nombre, teléfono, país, fecha y amount, de aquellas empresas que realizaron transacciones con un valor comprendido entre 100 y 200 euros 
-y en alguna de estas fechas: 29 de abril de 2021, 20 de julio de 2021 y 13 de marzo de 2022. Ordena los resultados de mayor a menor cantidad.
-'''
+#Ejercicio 1: Presenta el nombre, teléfono, país, fecha y amount, de aquellas empresas que realizaron transacciones con un valor comprendido entre 100 y 200 euros 
+# y en alguna de estas fechas: 29 de abril de 2021, 20 de julio de 2021 y 13 de marzo de 2022. Ordena los resultados de mayor a menor cantidad.
+
 SELECT c.company_name, c.phone, c.country, DATE(t.timestamp) AS date, t.amount
 FROM transaction t
 JOIN company c ON t.company_id = c.id
