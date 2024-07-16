@@ -100,7 +100,7 @@ ORDER BY t.amount DESC;
 #Ejercicio 2:  listado de las empresas donde especifiques si tienen más de 4 o menos transacciones.
 SELECT c.company_name,
 	CASE WHEN COUNT(t.id) > 4 THEN 'More than 4'
-	     WHEN COUNT(t.id) >= 4 THEN '4 or less than 4'
+	     WHEN COUNT(t.id) <= 4 THEN '4 or less than 4'
 	END AS 'Number of transactions'
 FROM transaction t
 JOIN company c ON t.company_id = c.id
