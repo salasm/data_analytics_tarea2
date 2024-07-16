@@ -4,7 +4,7 @@ SELECT DISTINCT c.country
 FROM transaction t
 JOIN company c ON t.company_id = c.id;
 
-#Ej. 2.2: Desde cuántos países se realizan las compras
+#Ej. 2.3: Desde cuántos países se realizan las compras
 SELECT COUNT(DISTINCT c.country) AS total_countries
 FROM transaction t
 JOIN company c ON t.company_id = c.id;
@@ -21,7 +21,7 @@ LIMIT 1;
 SELECT *
 FROM transaction
 WHERE company_id IN (
-	SELECT id
+    SELECT id
     FROM company
     WHERE country = 'Germany'
 );
@@ -30,10 +30,10 @@ WHERE company_id IN (
 SELECT company_name
 FROM company
 WHERE id IN (
-	SELECT company_id
+    SELECT company_id
     FROM transaction
     WHERE amount > (
-		SELECT AVG(amount)
+	SELECT AVG(amount)
         FROM transaction
 	)
 );
@@ -42,7 +42,7 @@ WHERE id IN (
 SELECT company_name
 FROM company
 WHERE id NOT IN (
-	SELECT company_id
+    SELECT company_id
     FROM transaction
 );
 
@@ -65,9 +65,9 @@ ORDER BY average_sales DESC;
 # Mostrar el listado aplicando JOIN y subconsultas:
 SELECT *
 FROM transaction t
-JOIN company c ON t.company = c.id
+JOIN company c ON t.company_id = c.id
 WHERE c.country = (
-	SELECT country
+    SELECT country
     FROM company
     WHERE company_name = 'Non Institute'
 );
@@ -76,10 +76,10 @@ WHERE c.country = (
 SELECT *
 FROM transaction
 WHERE company_id IN (
-	SELECT id
+    SELECT id
     FROM company
     WHERE country = (
-		SELECT country
+        SELECT country
         FROM company
         WHERE company_name = 'Non Institute'
 	)
@@ -94,13 +94,13 @@ SELECT c.company_name, c.phone, c.country, DATE(t.timestamp) AS date, t.amount
 FROM transaction t
 JOIN company c ON t.company_id = c.id
 WHERE t.amount BETWEEN 100 AND 200
-	  AND DATE(t.timestamp) IN ('2021-04-29', '2021-07-20', '2022-03-13')
+      AND DATE(t.timestamp) IN ('2021-04-29', '2021-07-20', '2022-03-13')
 ORDER BY t.amount DESC;
 
 #Ejercicio 2:  listado de las empresas donde especifiques si tienen más de 4 o menos transacciones.
 SELECT c.company_name,
 	CASE WHEN COUNT(t.id) > 4 THEN 'More than 4'
-		 WHEN COUNT(t.id) >= 4 THEN '4 or less than 4'
+	     WHEN COUNT(t.id) >= 4 THEN '4 or less than 4'
 	END AS 'Number of transactions'
 FROM transaction t
 JOIN company c ON t.company_id = c.id
