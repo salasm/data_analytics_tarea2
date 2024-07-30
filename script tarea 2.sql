@@ -109,7 +109,7 @@ SELECT c.company_name,
 	END AS 'Number of transactions'
 FROM transaction t
 JOIN company c ON t.company_id = c.id
-GROUP BY c.company_name
+GROUP BY c.company_name;
 		
 
 
